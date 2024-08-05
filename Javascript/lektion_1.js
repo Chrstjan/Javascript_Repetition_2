@@ -54,7 +54,7 @@ const btn = document.getElementById("click-btn");
 btn.addEventListener("click", () => {
     const domClickAmount = document.getElementById("click-amount");
     clickAmount++;
-    domClickAmount.innerHTML = clickAmount;
+    domClickAmount.innerHTML = `Clicks: ${clickAmount}`;
 })
 
 // Opgave 4
@@ -66,9 +66,9 @@ btn.addEventListener("click", () => {
 const submitBtn = document.getElementById("submit-btn");
 const inputField = document.getElementById("user-input");
 const inputContainer = document.querySelector(".input-container");
+const messageContainer = document.querySelector(".message-container");
 
 const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.{1,20}$).*/;
-let isValid = false;
 
 submitBtn.addEventListener("click", () => {
     let userInput = inputField.value;
@@ -80,10 +80,20 @@ submitBtn.addEventListener("click", () => {
 
     if (testInput()) {
         console.log("Passed!");
+        messageContainer.innerHTML = "";
+        const sucessMessage = `<h2>Password Valid!</h2>`;
+        messageContainer.innerHTML += sucessMessage;
     }
     else {
         console.log("Failed");
+        messageContainer.innerHTML = "";
+        const errorMessage = `<h2>Password not valid: </h2>`;
+        const errorsMessage = `<p>Must contain a capital letter, A special character and no longer than 20 characters</p>`;
+        messageContainer.innerHTML += errorMessage;
+        messageContainer.innerHTML += errorsMessage;
     }
+
+    inputContainer.appendChild(messageContainer);
 
     // if (userInput > 8) {
     //     const stopMessage = `<p>Stop criminal scum</p>`;
